@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200921184206) do
+ActiveRecord::Schema.define(version: 20200921211604) do
+
+  create_table "bills", force: :cascade do |t|
+    t.float "amount"
+    t.integer "staus"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "table_id"
+    t.index ["table_id"], name: "index_bills_on_table_id"
+  end
 
   create_table "categories", force: :cascade do |t|
     t.string "designation"
@@ -27,6 +36,24 @@ ActiveRecord::Schema.define(version: 20200921184206) do
     t.datetime "updated_at", null: false
     t.integer "category_id"
     t.index ["category_id"], name: "index_menu_items_on_category_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer "quantity"
+    t.string "note"
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "menu_item_id"
+    t.integer "bill_id"
+    t.index ["bill_id"], name: "index_orders_on_bill_id"
+    t.index ["menu_item_id"], name: "index_orders_on_menu_item_id"
+  end
+
+  create_table "tables", force: :cascade do |t|
+    t.integer "number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
