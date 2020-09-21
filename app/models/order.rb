@@ -4,5 +4,5 @@ class Order < ApplicationRecord
 
     validates :quantity, :bill_id, numericality: {only_integer: true}, presence: true
     validates :note, presence: true
-    validates :bill_status, numericality: {only_integer: true}, presence: true, inclusion: { in: [0, 1]}
+    validates :order_status, numericality: {only_integer: true}, presence: true, inclusion: { in: [0, 1]}
 end
