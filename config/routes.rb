@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :tables
   resources :bills
   resources :menu_items, only: [:index, :create, :update, :destroy]
   resources :categories, only: [:index, :create, :update, :destroy]
