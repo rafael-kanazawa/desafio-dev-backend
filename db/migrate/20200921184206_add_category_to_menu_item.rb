@@ -1,5 +1,5 @@
 class AddCategoryToMenuItem < ActiveRecord::Migration[5.1]
   def change
-    add_column :menu_items, :category, :reference
+    add_reference :menu_items, :category, foreign_key: true
   end
 end
