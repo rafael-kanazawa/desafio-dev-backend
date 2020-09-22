@@ -1,11 +1,9 @@
 class BillsController < ApplicationController
   before_action :set_bill, only: [:show, :update, :destroy]
-  before_action :update_bill, only:[:index, :show]
+  before_action :update_bill, only:[:index]
 
   # GET /bills
   def index
-    @bills = Bill.all
-
     render json: @bills
   end
 
@@ -52,5 +50,10 @@ class BillsController < ApplicationController
 
     def update_bill
       @bills = Bill.all
-      
+      @bills.each do |bill|
+        bill.orders.each do |order|
+          bill.amount += order.amount
+        end
+      end
+    end
 end

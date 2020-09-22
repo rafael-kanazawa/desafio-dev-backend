@@ -16,6 +16,7 @@ class OrdersController < ApplicationController
   # POST bills/1/orders
   def create
     @order = Order.new(order_params)
+    @order.amount = @order.quantity * @order.menu_item.price
 
     if @order.save
       render json: @order, status: :created, location: bill_orders_url(Bill.find(@order.bill_id))
