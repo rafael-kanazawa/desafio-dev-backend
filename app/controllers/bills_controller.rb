@@ -1,5 +1,6 @@
 class BillsController < ApplicationController
   before_action :set_bill, only: [:show, :update, :destroy]
+  before_action :update_bill, only:[:index, :show]
 
   # GET /bills
   def index
@@ -46,6 +47,10 @@ class BillsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def bill_params
-      params.require(:bill).permit(:amount, :bill_status, :table_id)
+      params.require(:bill).permit(:amount, :bill_status, :table_id, :table_number)
     end
+
+    def update_bill
+      @bills = Bill.all
+      
 end

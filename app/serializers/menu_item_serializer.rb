@@ -3,7 +3,7 @@ class MenuItemSerializer < ActiveModel::Serializer
 
   def dish_category
     {
-      categoryCategory: self.object.category.designation,
+      dishCategory: self.object.category.designation,
       categoryId: self.object.category.id
     }
   end
