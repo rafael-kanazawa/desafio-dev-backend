@@ -4,12 +4,12 @@ class BillsController < ApplicationController
 
   # GET /bills
   def index
-    render json: @bills
+    render json: @bills, each_serializer: SimpleBillSerializer
   end
 
   # GET /bills/1
   def show
-    render json: @bill
+    render json: @bill, serializer: CompleteBillSerializer
   end
 
   # POST /bills
@@ -17,7 +17,7 @@ class BillsController < ApplicationController
     @bill = Bill.new(bill_params)
 
     if @bill.save
-      render json: @bill, status: :created, location: @bill
+      render json: @bill, status: :created, location: @bill, serializer: CompleteBillSerializer
     else
       render json: @bill.errors, status: :unprocessable_entity
     end
@@ -26,7 +26,7 @@ class BillsController < ApplicationController
   # PATCH/PUT /bills/1
   def update
     if @bill.update(bill_params)
-      render json: @bill
+      render json: @bill, serializer: CompleteBillSerializer
     else
       render json: @bill.errors, status: :unprocessable_entity
     end

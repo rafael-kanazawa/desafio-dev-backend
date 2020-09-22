@@ -1,5 +1,5 @@
-class BillSerializer < ActiveModel::Serializer
-  attributes :id, :amount, :bill_status, :table_number, :order_list
+class CompleteBillSerializer < ActiveModel::Serializer
+  attributes :id, :amount, :bill_status, :table_number, :table_id, :order_list
   
   def order_list
     self.object.orders.map do |order|
