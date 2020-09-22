@@ -46,6 +46,6 @@ class MenuItemsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def menu_item_params
-      params.require(:menu_item).permit(:dish_name, :price, :description, :url_image)
+      params.require(:menu_item).permit(:dish_name, :price, :description, :url_imagem, :category_id)
     end
 end

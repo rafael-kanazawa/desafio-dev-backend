@@ -46,6 +46,6 @@ class BillsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def bill_params
-      params.require(:bill).permit(:amount, :bill_status)
+      params.require(:bill).permit(:amount, :bill_status, :table_id)
     end
 end
