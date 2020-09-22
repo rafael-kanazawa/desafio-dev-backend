@@ -52,8 +52,9 @@ class BillsController < ApplicationController
       @bills = Bill.all
       @bills.each do |bill|
         bill.orders.each do |order|
-          bill.amount += order.amount
+          bill.amount += order.amount != nil ? order.amount : 0
         end
+        bill.update(amount: bill.amount)
       end
     end
 end
