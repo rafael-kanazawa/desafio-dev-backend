@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :set_order, only: [:show, :update, :destroy]
+  before_action :set_and_update_order, only: [:show, :update, :destroy]
 
   # GET bills/1/orders
   def index
@@ -16,6 +16,7 @@ class OrdersController < ApplicationController
   # POST bills/1/orders
   def create
     @order = Order.new(order_params)
+    @order.order_status = 0
     @order.amount = @order.quantity * @order.menu_item.price
 
     if @order.save
@@ -40,13 +41,14 @@ class OrdersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_order
+    # Sets a order object and Updates the amount atribute before update, delete and show actions
+    def set_and_update_order
       @order = Order.find(params[:id])
+      @order.amount = @order.quantity * @order.menu_item.price
     end
 
     # Only allow a trusted parameter "white list" through.
     def order_params
-      params.require(:order).permit(:quantity, :note, :order_status, :bill_id, :menu_item_id)
+      params.require(:order).permit(:quantity, :note, :bill_id, :menu_item_id, :order_status)
     end
 end

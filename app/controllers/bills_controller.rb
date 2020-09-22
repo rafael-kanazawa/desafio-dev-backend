@@ -47,7 +47,7 @@ class BillsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def bill_params
-      params.require(:bill).permit(:table_id, :table_number)
+      params.require(:bill).permit(:table_id, :table_number, :bill_status)
     end
 
     #Sets and Updates the amount atribute in all bills. Called before index action
