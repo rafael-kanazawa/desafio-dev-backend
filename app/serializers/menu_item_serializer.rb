@@ -1,3 +1,10 @@
 class MenuItemSerializer < ActiveModel::Serializer
-  attributes :id
+  attributes :id, :dish_name, :description, :price, :url_image, :dish_category
+
+  def dish_category
+    {
+      categoryCategory: self.object.category.designation,
+      categoryId: self.object.category.id
+    }
+  end
 end
