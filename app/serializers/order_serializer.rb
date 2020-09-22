@@ -1,5 +1,5 @@
 class OrderSerializer < ActiveModel::Serializer
-  attributes :id, :quantity, :note, :order_status, :order_menu_item
+  attributes :id, :quantity, :note, :amount, :order_status, :order_menu_item
 
   def order_menu_item
     {
