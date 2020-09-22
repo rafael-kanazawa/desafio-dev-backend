@@ -1,6 +1,6 @@
 class BillsController < ApplicationController
-  before_action :set_bill, only: [:show, :update, :destroy]
-  before_action :update_bill, only:[:index]
+  before_action :set_and_update_bill, only: [:show, :update, :destroy]
+  before_action :update_bills, only:[:index]
 
   # GET /bills
   def index
@@ -15,9 +15,11 @@ class BillsController < ApplicationController
   # POST /bills
   def create
     @bill = Bill.new(bill_params)
+    @bill.amount = 0
+    @bill.bill_status = 0
 
     if @bill.save
-      render json: @bill, status: :created, location: @bill, serializer: CompleteBillSerializer
+      render json: @bill, status: :created, location: @bill, serializer: SimpleBillSerializer
     else
       render json: @bill.errors, status: :unprocessable_entity
     end
@@ -38,17 +40,18 @@ class BillsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_bill
+    # Sets and Updates the amount atribute of a single bill before show, update and delete actions
+    def set_and_update_bill
       @bill = Bill.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
     def bill_params
-      params.require(:bill).permit(:amount, :bill_status, :table_id, :table_number)
+      params.require(:bill).permit(:table_id, :table_number)
     end
 
-    def update_bill
+    #Sets and Updates the amount atribute in all bills. Called before index action
+    def update_bills
       @bills = Bill.all
       @bills.each do |bill|
         bill.orders.each do |order|
