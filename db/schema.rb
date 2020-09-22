@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200921230228) do
+ActiveRecord::Schema.define(version: 20200922011029) do
 
   create_table "bills", force: :cascade do |t|
     t.float "amount"
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 20200921230228) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "table_id"
+    t.integer "table_number"
     t.index ["table_id"], name: "index_bills_on_table_id"
   end
 
