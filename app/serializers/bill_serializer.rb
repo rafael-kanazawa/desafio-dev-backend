@@ -6,8 +6,9 @@ class BillSerializer < ActiveModel::Serializer
       {
         orderId: order.id,
         dishName: MenuItem.find(order.menu_item_id).dish_name,
-        quantity: order.quantity,
         note: order.note,
+        quantity: order.quantity,
+        amount: order.amount,
         status: order.order_status
       }
     end
