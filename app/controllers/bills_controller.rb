@@ -2,6 +2,7 @@ class BillsController < ApplicationController
   before_action :set_and_update_bill, only: [:show, :update, :destroy]
   before_action :update_bills, only:[:index]
   before_action :authenticate_user!
+  load_and_authorize_resource
 
   # GET /bills
   def index
@@ -28,11 +29,13 @@ class BillsController < ApplicationController
 
   # PATCH/PUT /bills/1
   def update
-    if @bill.update(bill_params)
-      render json: @bill, serializer: CompleteBillSerializer
-    else
-      render json: @bill.errors, status: :unprocessable_entity
-    end
+    if current_user.role == "clerk"
+
+      if @bill.update(bill_params)
+        render json: @bill, serializer: CompleteBillSerializer
+      else
+        render json: @bill.errors, status: :unprocessable_entity
+      end
   end
 
   # DELETE /bills/1
@@ -47,8 +50,12 @@ class BillsController < ApplicationController
     end
 
     # Only allow a trusted parameter "white list" through.
-    def bill_params
-      params.require(:bill).permit(:table_id, :table_number, :bill_status)
+    def bill_params_manager
+      if current_user.role == "clerk"
+        params.require(:bill).permit(:table_id, :table_number)
+      else
+        params.require(:bill).permit(:table_id, :table_number, :bill_status)
+      end
     end
 
     #Sets and Updates the amount atribute in all bills. Called before index action

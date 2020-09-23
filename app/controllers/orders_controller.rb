@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
   before_action :set_and_update_order, only: [:show, :update, :destroy]
   before_action :authenticate_user!
+  load_and_authorize_resource
 
   # GET bills/1/orders
   def index

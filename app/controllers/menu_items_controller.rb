@@ -1,6 +1,7 @@
 class MenuItemsController < ApplicationController
   before_action :set_menu_item, only: [:show, :update, :destroy]
   before_action :authenticate_user!
+  load_and_authorize_resource
 
   # GET /menu_items
   def index
