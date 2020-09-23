@@ -1,5 +1,6 @@
 class TablesController < ApplicationController
   before_action :set_table, only: [:show, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /tables
   def index

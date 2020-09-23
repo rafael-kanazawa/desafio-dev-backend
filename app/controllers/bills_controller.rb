@@ -1,6 +1,7 @@
 class BillsController < ApplicationController
   before_action :set_and_update_bill, only: [:show, :update, :destroy]
   before_action :update_bills, only:[:index]
+  before_action :authenticate_user!
 
   # GET /bills
   def index
