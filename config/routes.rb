@@ -2,10 +2,8 @@ Rails.application.routes.draw do
   #POST to /log_in => authentication method in AuthenticationController
   post '/log_in' to: 'authentication#authenticate_user'
 
-  get '/user' to: 'user#index'
-  post 'user/sign_in' to: 'user#create'
-  delete '/user' to: 'user#delete'
-  resources 
+  post '/sign_in' to: 'user#create'
+  resources :users, only: [:index, :delete, :update]
 
   resources :tables
   resources :bills do
