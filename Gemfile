@@ -27,6 +27,11 @@ gem 'rack-cors'
 #Serializer for render json
 gem 'active_model_serializers'
 
+#Devise for user authentication
+gem 'devise'
+#Devise extension to JWT tokens for user authentication
+gem 'devise-jwt'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
