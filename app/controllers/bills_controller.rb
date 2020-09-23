@@ -1,4 +1,5 @@
 class BillsController < ApplicationController
+  before_action :authenticate_request!
   before_action :set_and_update_bill, only: [:show, :update, :destroy]
   before_action :update_bills, only:[:index]
 

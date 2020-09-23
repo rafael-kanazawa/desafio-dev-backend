@@ -1,4 +1,5 @@
 class MenuItemsController < ApplicationController
+  before_action :authenticate_request!
   before_action :set_menu_item, only: [:show, :update, :destroy]
 
   # GET /menu_items
