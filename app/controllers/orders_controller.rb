@@ -51,6 +51,12 @@ class OrdersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def order_params
-      params.require(:order).permit(:quantity, :note, :bill_id, :menu_item_id, :order_status)
+      if current_user.role == "clerk"
+        params.require(:order).permit(:quantity, :note, :bill_id, :menu_item_id)
+      if current_user.role == "cooker"
+        params.require(:order).permit(:order_status)
+      else
+        params.require(:order).permit(:quantity, :note, :bill_id, :menu_item_id, :order_status)
+      end
     end
 end
