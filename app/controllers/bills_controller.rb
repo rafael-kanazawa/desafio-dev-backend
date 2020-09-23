@@ -29,13 +29,11 @@ class BillsController < ApplicationController
 
   # PATCH/PUT /bills/1
   def update
-    if current_user.role == "clerk"
-
-      if @bill.update(bill_params)
-        render json: @bill, serializer: CompleteBillSerializer
-      else
-        render json: @bill.errors, status: :unprocessable_entity
-      end
+    if @bill.update(bill_params)
+      render json: @bill, serializer: CompleteBillSerializer
+    else
+      render json: @bill.errors, status: :unprocessable_entity
+    end
   end
 
   # DELETE /bills/1
