@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   post '/log_in', to: 'authentication#authenticate_user'
 
   post '/sign_in', to: 'users#create'
-  resources :users, only: [:index, :delete, :update]
+  resources :users, only: [:index, :destroy, :update]
 
   resources :tables
   resources :bills do

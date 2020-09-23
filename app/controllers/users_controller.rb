@@ -8,6 +8,7 @@ class UsersController < ApplicationController
     render json: @users
   end
 
+  #GET /users/id
   def show
     render json: @user
   end
@@ -27,7 +28,7 @@ class UsersController < ApplicationController
     end
   end
 
-  #PUT/PATCH /user/id
+  #PUT/PATCH /users/id
   def update
     if @user.update(user_params)
       render json: @user
@@ -36,19 +37,20 @@ class UsersController < ApplicationController
     end
   end
 
-  #DELETE /user/id
+  #DELETE /users/id
   def destroy
     @user.destroy
   end
 
   private 
 
-  def set_user
-    @user = User.find(params[:id])
-  end
+    def set_user
+      @user = User.find(params[:id])
+      puts @user
+    end
 
-  def user_params
-    params.permit(:user_name, :password, :role, :email)
-  end
+    def user_params
+      params.permit(:user_name, :password, :role, :email)
+    end
 
 end
