@@ -1,12 +1,17 @@
 class UserController < ApplicationController
   before_action :authenticate_request!, only:[:index, :update, :delete]
+  before_action :set_user, only: [:show, :update, :delete]
 
-  #Authorization example
+  #GET /user
   def index
-    render json: {'logged_in' => true}
+    @users = User.all
+    render json: @users
   end
 
-  #POST /user/sign_in
+  def show
+    render json: @user
+
+  #POST /sign_in
   def create
     @user = User.create(user_params)
     if @user.valid?
@@ -20,8 +25,25 @@ class UserController < ApplicationController
     end
   end
 
+  #PUT/PATCH /user/id
+  def update
+    if @user.update(user_params)
+      render json: @user
+    else
+      render json: @user.errors, status: :unprocessable_entity
+    end
+  end
+
+  #DELETE /user/id
+  def destroy
+    @user.destroy
+  end
 
   private 
+
+  def set_user
+    @user = User.find(params[:id])
+  end
 
   def user_params
     params.permit(:user_name, :password, :role, :email)
