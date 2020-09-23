@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_request!, only:[:index, :show, :update, :delete]
-  before_action :set_user, only: [:show, :update, :delete]
+  before_action :set_user, only: [:show, :update, :destroy]
 
   #GET /users
   def index
@@ -39,8 +39,8 @@ class UsersController < ApplicationController
 
   #DELETE /users/id
   def destroy
-    if @user
-      @user.destroy
+    if @user.destroy
+      render json: {messagem: "Successfully Deleted"}
     end
   end
 
@@ -48,7 +48,6 @@ class UsersController < ApplicationController
 
     def set_user
       @user = User.find(params[:id])
-      puts @user
     end
 
     def user_params
