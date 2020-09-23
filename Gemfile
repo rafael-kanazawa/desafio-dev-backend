@@ -32,6 +32,9 @@ gem 'devise'
 #Devise extension to JWT tokens for user authentication
 gem 'devise-jwt'
 
+#Use Figaro for environment variables management
+gem "figaro"
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
