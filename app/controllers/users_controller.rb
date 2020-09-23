@@ -1,8 +1,8 @@
-class UserController < ApplicationController
-  before_action :authenticate_request!, only:[:index, :update, :delete]
+class UsersController < ApplicationController
+  before_action :authenticate_request!, only:[:index, :show, :update, :delete]
   before_action :set_user, only: [:show, :update, :delete]
 
-  #GET /user
+  #GET /users
   def index
     @users = User.all
     render json: @users
@@ -10,18 +10,20 @@ class UserController < ApplicationController
 
   def show
     render json: @user
+  end
 
   #POST /sign_in
   def create
     @user = User.create(user_params)
     if @user.valid?
-      if @table.save
-        render json: @table, status: :created, location: @table, payload(user)
+      if @user.save
+        render json: payload(@user)
       else
-        render json: @table.errors, status: :unprocessable_entity
+        render json: @user.errors, status: :unprocessable_entity
       end
     else
-      render json: {error: "Invalid username or password"}
+      render json: @user.errors
+      #{error: "Invalid username or password"}
     end
   end
 
