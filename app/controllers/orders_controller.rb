@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
   before_action :authenticate_request!
   before_action :set_and_update_order, only: [:show, :update, :destroy]
+  load_and_authorize_resource
 
   # GET bills/1/orders
   def index
@@ -48,8 +49,16 @@ class OrdersController < ApplicationController
       @order.amount = @order.quantity * @order.menu_item.price
     end
 
+
     # Only allow a trusted parameter "white list" through.
     def order_params
-      params.require(:order).permit(:quantity, :note, :bill_id, :menu_item_id, :order_status)
+      if current_user.role == "clerk"
+        params.require(:order).permit(:quantity, :note, :bill_id, :menu_item_id)
+      if current_user.role == "cooker"
+        params.require(:order).permit(:order_status)
+      else
+        params.require(:order).permit(:quantity, :note, :bill_id, :menu_item_id, :order_status)
+      end
     end
+
 end

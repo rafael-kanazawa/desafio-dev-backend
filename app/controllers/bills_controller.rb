@@ -1,7 +1,8 @@
 class BillsController < ApplicationController
   before_action :authenticate_request!
   before_action :set_and_update_bill, only: [:show, :update, :destroy]
-  before_action :update_bills, only:[:index]
+  before_action :update_bills, only: [:index]
+  load_and_authorize_resource
 
   # GET /bills
   def index
@@ -46,11 +47,6 @@ class BillsController < ApplicationController
       @bill = Bill.find(params[:id])
     end
 
-    # Only allow a trusted parameter "white list" through.
-    def bill_params
-      params.require(:bill).permit(:table_id, :table_number, :bill_status)
-    end
-
     #Sets and Updates the amount atribute in all bills. Called before index action
     def update_bills
       @bills = Bill.all
@@ -59,6 +55,14 @@ class BillsController < ApplicationController
           bill.amount += order.amount != nil ? order.amount : 0
         end
         bill.update(amount: bill.amount)
+      end
+    end
+
+    def bill_params
+      if current_user.role == "clerk"
+        params.require(:bill).permit(:table_id, :table_number)
+      else
+        params.require(:bill).permit(:table_id, :table_number, :bill_status)
       end
     end
 end
