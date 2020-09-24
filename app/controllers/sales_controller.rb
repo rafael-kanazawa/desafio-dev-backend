@@ -1,4 +1,5 @@
 class SalesController < ApplicationController
+  before_action :authenticate_request!
   before_action :set_sale, only: [:show, :destroy]
   load_and_authorize_resource
 
