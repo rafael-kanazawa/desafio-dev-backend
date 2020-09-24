@@ -1,5 +1,6 @@
 class SalesController < ApplicationController
-  before_action :set_sale, only: [:show, :update, :destroy]
+  before_action :set_sale, only: [:show, :destroy]
+  load_and_authorize_resource
 
   # GET /sales
   def index
@@ -11,26 +12,6 @@ class SalesController < ApplicationController
   # GET /sales/1
   def show
     render json: @sale
-  end
-
-  # POST /sales
-  def create
-    @sale = Sale.new(sale_params)
-
-    if @sale.save
-      render json: @sale, status: :created, location: @sale
-    else
-      render json: @sale.errors, status: :unprocessable_entity
-    end
-  end
-
-  # PATCH/PUT /sales/1
-  def update
-    if @sale.update(sale_params)
-      render json: @sale
-    else
-      render json: @sale.errors, status: :unprocessable_entity
-    end
   end
 
   # DELETE /sales/1
@@ -46,6 +27,6 @@ class SalesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def sale_params
-      params.require(:sale).permit(:amount)
+      params.require(:sale).permit(:bill_id)
     end
 end

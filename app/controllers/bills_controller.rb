@@ -41,7 +41,22 @@ class BillsController < ApplicationController
     @bill.destroy
   end
 
+  def close_bill
+    @bill.update(bill_status: 1)
+    create_sale(@bill)
+    render json: {mensagem: "Bill closed succefully"}
+  end
+
+
   private
+    def create_sale(bill)
+      sale = Sale.new(bill_id: bill.id)
+      bill.orders.each do |order|
+        sale.amount += order.amount
+      end
+      sale.save
+    end
+
     # Sets and Updates the amount atribute of a single bill before show, update and delete actions
     def set_and_update_bill
       @bill = Bill.find(params[:id])
