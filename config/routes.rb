@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :sales
   #POST to /log_in => authentication method in AuthenticationController
   post '/log_in', to: 'authentication#authenticate_user'
 

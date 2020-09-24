@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200923204315) do
+ActiveRecord::Schema.define(version: 20200924031201) do
 
   create_table "bills", force: :cascade do |t|
     t.float "amount"
@@ -50,6 +50,14 @@ ActiveRecord::Schema.define(version: 20200923204315) do
     t.float "amount"
     t.index ["bill_id"], name: "index_orders_on_bill_id"
     t.index ["menu_item_id"], name: "index_orders_on_menu_item_id"
+  end
+
+  create_table "sales", force: :cascade do |t|
+    t.float "amount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "order_id"
+    t.index ["order_id"], name: "index_sales_on_order_id"
   end
 
   create_table "tables", force: :cascade do |t|

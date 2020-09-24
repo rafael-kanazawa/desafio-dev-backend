@@ -22,7 +22,7 @@ Things you may want to cover:
 
 * Server URL: https://api-restaurant-system.herokuapp.com/
 
-* Serve Routes:
+* Server Routes:
   Category:
   - GET /categories
   - POST /categories:
@@ -34,7 +34,25 @@ Things you may want to cover:
   MenuItem:
   - GET /menu_items
   - POST /menu_items:
-    JSON: {}
+    JSON: {"quantity": integer, "note": "string", "bill_id": integer, "menu_item_id":integer}
+  - PUT/PATCH /menu_items/:id:
+    JSON: {"quantity": integer, "note": "string", "bill_id": integer, "menu_item_id":integer, "order_status": integer}
+  - DELETE /menu_items/:id
+
+  Table
+  - GET /tables
+  - POST /tables:
+    JSON: 
+
+  Bill:
+  - GET /bills
+  - POST /bills:
+    JSON: {"table_number": integer, "table_id": integer}
+  - PUT/PATCH /bills/:id:
+    JSON: {"table_number": integer, "table_id": integer}
+  - DELETE /bills/:id
+
+
    
 
 
