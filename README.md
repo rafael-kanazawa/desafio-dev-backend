@@ -5,20 +5,18 @@ application up and running.
 
 Things you may want to cover:
 
-* Ruby version
+* Ruby version 2.6
+* Rails version 5.1.7
 
 * System dependencies
+  - Devise
+  - JWT
+  - Active Model Serializers
+  - Rack-Cors
 
-* Configuration
+* Database in Development
+  - SQLite3
 
-* Database creation
+* Database in Production
+  - PostgresSQL
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
