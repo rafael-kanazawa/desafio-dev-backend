@@ -5,7 +5,7 @@ application up and running.
 
 Things you may want to cover:
 
-* Ruby version 2.6
+* Ruby version ruby 2.6.6
 * Rails version 5.1.7
 
 * System dependencies
@@ -19,4 +19,22 @@ Things you may want to cover:
 
 * Database in Production
   - PostgresSQL
+
+* Server URL: https://api-restaurant-system.herokuapp.com/
+
+* Serve Routes:
+  Category:
+  - GET /categories
+  - POST /categories:
+    JSON: {"designation":"string"}
+  - PUT/PATCH /categories/:id:
+    JSON: {"designation":"string"} 
+  - DELETE /categories/:id
+  
+  MenuItem:
+  - GET /menu_items
+  - POST /menu_items:
+    JSON: {}
+   
+
 
