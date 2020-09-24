@@ -30,10 +30,10 @@ gem 'rack-cors'
 gem 'active_model_serializers'
 
 #Authentication strategy
-gem 'devise'
-gem 'jwt'
+gem 'devise', '~> 4.2'
+gem 'jwt', '~> 2.2'
 
-gem "cancancan"
+gem 'cancancan', '~> 3.1' 
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
