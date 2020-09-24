@@ -42,6 +42,7 @@ class BillsController < ApplicationController
   end
 
   def close_bill
+    @bill = Bill.find(params[:id])
     @bill.update(bill_status: 1)
     create_sale(@bill)
     render json: {mensagem: "Bill closed succefully"}
@@ -60,6 +61,10 @@ class BillsController < ApplicationController
     # Sets and Updates the amount atribute of a single bill before show, update and delete actions
     def set_and_update_bill
       @bill = Bill.find(params[:id])
+      @bill.orders.each do |order|
+        @bill.amount += order.amount != nil ? order.amount : 0
+      end
+      @bill.update(amount: bill.amount)
     end
 
     #Sets and Updates the amount atribute in all bills. Called before index action

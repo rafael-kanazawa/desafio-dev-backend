@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :destroy, :update]
 
   
-  put '/close_bill', to: 'bills#close_bill'
+  put '/close_bill/:id', to: 'bills#close_bill'
   resources :bills do
     resources :orders
   end
